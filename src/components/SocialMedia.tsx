@@ -39,7 +39,7 @@ function InstagramEmbed({ url }: { url: string }) {
 
 function TikTokEmbed({ id }: { id: string }) {
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && !document.querySelector('script[src="https://www.tiktok.com/embed.js"]')) {
       const script = document.createElement('script')
       script.src = 'https://www.tiktok.com/embed.js'
       script.async = true

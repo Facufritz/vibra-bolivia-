@@ -38,3 +38,6 @@ next-env.d.ts
 *.MP4
 *.mov
 *.MOV
+
+# large photo assets (kept locally, not in git)
+public/assets/multimedia/Fotos-Vibra-Bolivia-2026/

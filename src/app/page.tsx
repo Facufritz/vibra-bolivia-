@@ -4,6 +4,7 @@ import Timeline from '@/components/Timeline'
 import Aftermovie from '@/components/Aftermovie'
 import SpotifyPlayer from '@/components/SpotifyPlayer'
 import SocialMedia from '@/components/SocialMedia'
+import Teaser2027 from '@/components/Teaser2027'
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Aftermovie />
       <SpotifyPlayer />
       <SocialMedia />
+      <Teaser2027 />
     </main>
   )
 }

@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #5B2D8E;
+    color: white;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .vibra-texture {
+    background-image: url('/assets/branding/fondo.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+}

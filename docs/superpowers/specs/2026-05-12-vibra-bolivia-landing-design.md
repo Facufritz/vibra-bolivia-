@@ -29,12 +29,12 @@ Landing page para el festival Vibra Bolivia que:
 | Inspiración | Lollapalooza, Love the 90s LATAM |
 | Estilo | Colorido, vibrante, 3D ilustrativo, cultura boliviana sin colores de bandera |
 
-### Assets disponibles en `D:\Diseño\Documents\Vibra-Bolivia\assets\Branding\`
+### Assets de Branding — `public/assets/branding/` (copiar desde `D:\Diseño\...\Branding\`)
 
 | Archivo | Contenido |
 |---------|-----------|
 | `Chiru png .png` | Mascota principal, PNG con fondo transparente |
-| `fondo.jpg` | Gradiente de marca con textura |
+| `fondo.jpg` | Gradiente de marca con textura arrugada |
 | `fondo sin patron.jpg` | Gradiente limpio sin textura |
 | `estadio 3d.png` | Entrada 3D del estadio con banners "VIBRA", fondo transparente |
 | `IMG_3494.PNG` | Pasto/arbustos 3D decorativos |
@@ -42,9 +42,20 @@ Landing page para el festival Vibra Bolivia que:
 | `IMG_3496.PNG` | Montañas andinas low-poly |
 | `IMG_3503.PNG` | Personaje bailarín (sticker con outline blanco) |
 | `IMG_3504–3514.PNG` | Más personajes y elementos decorativos |
-| `preventa 1440.jpg` | Afiche oficial de preventa — referencia de composición |
-| `ya tenemos fecha.jpg` | Afiche de fecha — referencia de composición |
-| `vibra horarios 2.jpg` | Horario oficial de artistas (ver Timeline más abajo) |
+
+### Assets Multimedia — `public/assets/multimedia/` (ya en `Public/assets/Multimedia/`)
+
+| Archivo | Contenido | Uso |
+|---------|-----------|-----|
+| `Vibra Bolivia after movie.mp4` | Aftermovie 2025 | Hero video fullscreen |
+| `vibra bolivia video vertical(1).mp4` | Video vertical | Hero en mobile |
+| `Chiru_v02.mp4` | Chiru animado | Sección teaser 2027 |
+| `DJI_0018.MP4` / `DJI_20250322185330_0009_D.MP4` | Footage de dron | Complemento visual |
+| `vibra png.png` | Logo Vibra PNG | Header / Hero |
+
+### Fotos por Artista — `public/assets/multimedia/Fotos-Vibra-Bolivia-2026/`
+
+Subcarpetas disponibles: `Bailarines`, `Chila Jatun`, `Dj y Animador`, `Eclipse`, `Grupo Femenino Bolivia`, `Los Capos`, `Los Ronish`, `Munay`, `Proyeccion`, `Turromanticos`, `bonanza`, `publico`
 
 ---
 
@@ -80,12 +91,14 @@ Los assets se sirven desde `public/assets/` — Next.js los expone en `/assets/.
 
 ### 1. Hero — Video Fullscreen
 
-- Video del aftermovie 2025 como fondo completo (`<video>` con `autoplay muted loop playsinline`)
+- Video `Vibra Bolivia after movie.mp4` como fondo fullscreen (`<video autoplay muted loop playsinline>`)
+- Animación de entrada: el video arranca pequeño al centro y hace zoom hasta cubrir la pantalla completa (framer-motion scale: 0.3 → 1)
 - Overlay semitransparente del gradiente de marca (violeta oscuro ~60% opacidad)
-- Logo "VIBRA BOLIVIA" centrado, tamaño grande
+- Logo "VIBRA BOLIVIA" (`vibra png.png`) centrado, tamaño grande
 - Frase de impacto debajo: *"El festival que le devolvió la música a Bolivia"*
 - Flecha animada (bounce) al pie invitando a hacer scroll
 - Nubes 3D flotando en los laterales con animación CSS lenta (float)
+- En mobile: usar `vibra bolivia video vertical(1).mp4` en lugar del video horizontal
 - Fallback: si el video no carga, `fondo.jpg` como background estático
 
 ### 2. Números que Impactan
@@ -117,7 +130,7 @@ Línea horizontal de tiempo basada en el horario real de la 2da edición:
 | 19:30 | Turbo Mantikos |
 | 20:45 | Bonanza |
 | 21:50 | Eclipse |
-| 23:05 | Los Chalajaton |
+| 23:05 | Los chila jatun |
 | 00:20 | Los Ronisch |
 
 - Navegación con flechas del teclado (← →) y swipe en mobile
@@ -137,17 +150,22 @@ Línea horizontal de tiempo basada en el horario real de la 2da edición:
 ### 5. La Música — Ventana Spotify
 
 - Embed oficial de Spotify (`<iframe>` con `open.spotify.com/embed/playlist/...`)
-- Playlist del festival: portada, tracks scrolleables, reproducción de previews (30s sin login, completa con login)
+- **Playlist:** `https://open.spotify.com/playlist/5HIpNO8FbzDDGhHdyRLvib`
+- Muestra portada, tracks scrolleables, reproducción de previews (30s sin login, completa con login)
 - Misma estética de "ventana" que la sección YouTube
-- **Pendiente:** URL de la playlist de Spotify (el cliente la provee)
 
 ### 6. Comunidad — Redes Sociales
 
-- **Instagram:** Embed de últimas publicaciones. Fallback: grilla estática con fotos + link al perfil
-- **TikTok:** Últimos videos embebidos. Fallback: grilla estática con link al perfil
+- **Instagram:** Embed de 2 reels recientes. Fallback: grilla estática + link al perfil
+  - Reel 1: `https://www.instagram.com/reel/DWKREqyEfF3/`
+  - Reel 2: `https://www.instagram.com/reel/DWLPeq4jGrN/`
+  - Perfil: `https://www.instagram.com/vibra.bolivia`
+- **TikTok:** Embed de 2 videos recientes. Fallback: grilla estática + link al perfil
+  - Video 1: `https://www.tiktok.com/@vibra.bolivia/video/7620189048388193557`
+  - Video 2: `https://www.tiktok.com/@vibra.bolivia/video/7619917081307286805`
+  - Perfil: `https://www.tiktok.com/@vibra.bolivia`
 - Dos columnas en desktop, apiladas en mobile
 - Botones CTA grandes: *"Seguinos en Instagram"* / *"Seguinos en TikTok"*
-- **Pendiente:** URLs de los perfiles (el cliente los provee)
 
 ### 7. Próximamente 2027 — Teaser
 
@@ -198,8 +216,8 @@ La ticketera futura se agrega como:
 
 | Item | Estado |
 |------|--------|
-| Video aftermovie 2025 (hero) | Pendiente de subir |
-| URL playlist Spotify | Pendiente |
-| URLs perfiles IG y TikTok | Pendiente |
-| Fotos del festival para el timeline | Pendiente de subir a `public/assets/festival/` |
-| Frase definitiva para teaser 2027 | A confirmar |
+| Video aftermovie 2025 (hero) | ✅ Disponible en `Public/assets/Multimedia/Vibra Bolivia after movie.mp4` |
+| URL playlist Spotify | ✅ `https://open.spotify.com/playlist/5HIpNO8FbzDDGhHdyRLvib` |
+| URLs perfiles IG y TikTok | ✅ Incorporadas en la sección 6 |
+| Fotos del festival para el timeline | ✅ En `Public/assets/Multimedia/Fotos-Vibra-Bolivia-2026/` (subcarpeta por banda) |
+| Frase definitiva para teaser 2027 | Usar *"2027 se viene"* — confirmar antes del deploy |

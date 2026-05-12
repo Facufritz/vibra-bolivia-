@@ -19,12 +19,32 @@ Landing page para el festival Vibra Bolivia que:
 
 | Elemento | Valor |
 |----------|-------|
-| Fondo principal | Gradiente: `violeta/púrpura → rosa → durazno` |
-| Tipografía logo | Naranja |
-| Detalles / acentos | Azul claro |
-| Mascota | Chiru (personaje principal) + personajes secundarios (nubes, pastos, extras) |
+| Fondo principal | Gradiente: durazno/naranja (arriba) → rosa/magenta (centro) → violeta/púrpura (abajo) |
+| Color hex aprox. | `#F5A020` → `#E8498A` → `#5B2D8E` |
+| Tipografía logo | Naranja/amarillo degradado con outline azul |
+| Detalles / acentos | Azul claro (`#4FC3F7` aprox.) |
+| Fondo tiene textura | Sí — efecto tela/papel arrugado sobre el gradiente |
+| Mascota principal | **Chiru** — oso blanco 3D con máscara de carnaval boliviano (Morenada). Brazos abiertos. |
+| Elementos decorativos | Nubes 3D blancas, montañas andinas low-poly grises, pasto/arbustos 3D verdes, personajes bailando (sticker con outline blanco), entrada 3D del estadio |
 | Inspiración | Lollapalooza, Love the 90s LATAM |
-| Estilo | Colorido, vibrante, cultura boliviana sin usar colores de la bandera |
+| Estilo | Colorido, vibrante, 3D ilustrativo, cultura boliviana sin colores de bandera |
+
+### Assets disponibles en `D:\Diseño\Documents\Vibra-Bolivia\assets\Branding\`
+
+| Archivo | Contenido |
+|---------|-----------|
+| `Chiru png .png` | Mascota principal, PNG con fondo transparente |
+| `fondo.jpg` | Gradiente de marca con textura |
+| `fondo sin patron.jpg` | Gradiente limpio sin textura |
+| `estadio 3d.png` | Entrada 3D del estadio con banners "VIBRA", fondo transparente |
+| `IMG_3494.PNG` | Pasto/arbustos 3D decorativos |
+| `IMG_3495.PNG` | Nube 3D blanca |
+| `IMG_3496.PNG` | Montañas andinas low-poly |
+| `IMG_3503.PNG` | Personaje bailarín (sticker con outline blanco) |
+| `IMG_3504–3514.PNG` | Más personajes y elementos decorativos |
+| `preventa 1440.jpg` | Afiche oficial de preventa — referencia de composición |
+| `ya tenemos fecha.jpg` | Afiche de fecha — referencia de composición |
+| `vibra horarios 2.jpg` | Horario oficial de artistas (ver Timeline más abajo) |
 
 ---
 
@@ -34,7 +54,7 @@ Landing page para el festival Vibra Bolivia que:
 vibra-bolivia/
 ├── public/
 │   └── assets/
-│       ├── branding/      ← logos, fuentes, personajes (Chiru, PNG/SVG)
+│       ├── branding/      ← copiar todos los archivos de D:\Diseño\...\Branding aquí
 │       └── festival/      ← fotos y videos del evento (2025, 2026)
 ├── src/
 │   ├── app/
@@ -52,7 +72,7 @@ vibra-bolivia/
 └── ...config files
 ```
 
-Los assets se sirven directamente desde `public/assets/` — Next.js los expone en `/assets/...` sin configuración adicional.
+Los assets se sirven desde `public/assets/` — Next.js los expone en `/assets/...` sin configuración adicional.
 
 ---
 
@@ -60,77 +80,102 @@ Los assets se sirven directamente desde `public/assets/` — Next.js los expone 
 
 ### 1. Hero — Video Fullscreen
 
-- Video del aftermovie 2025 como fondo completo (`<video>` con `autoplay muted loop`)
-- Overlay semitransparente con el gradiente de marca (violeta con opacidad ~60%)
-- Logo de Vibra Bolivia centrado, tamaño grande
-- Frase de impacto debajo del logo (ej: *"El festival que le devolvió la música a Bolivia"*)
+- Video del aftermovie 2025 como fondo completo (`<video>` con `autoplay muted loop playsinline`)
+- Overlay semitransparente del gradiente de marca (violeta oscuro ~60% opacidad)
+- Logo "VIBRA BOLIVIA" centrado, tamaño grande
+- Frase de impacto debajo: *"El festival que le devolvió la música a Bolivia"*
 - Flecha animada (bounce) al pie invitando a hacer scroll
-- Fallback: si el video no carga, el gradiente de fondo solo funciona igual
+- Nubes 3D flotando en los laterales con animación CSS lenta (float)
+- Fallback: si el video no carga, `fondo.jpg` como background estático
 
 ### 2. Números que Impactan
 
-- Fila de 4 métricas grandes sobre el gradiente de marca
-- Ejemplos: asistentes, artistas, escenarios, horas de música
-- Animación de conteo (`count-up`) al entrar en el viewport
-- Chiru aparece como elemento decorativo en este bloque (PNG con transparencia)
+| Métrica | Valor |
+|---------|-------|
+| Asistentes | 15.000+ personas |
+| Artistas | 10 artistas en vivo |
+| Horas de música | 12 horas de música en vivo |
+| Ediciones | 2 ediciones |
 
-### 3. Timeline Interactivo
+- Animación de conteo (`count-up`) al entrar en viewport
+- Chiru aparece a un costado como elemento decorativo
+- Pasto 3D en el borde inferior de la sección
+- Fondo con gradiente de marca
 
-- Línea horizontal de tiempo con puntos clickeables
-- Navegación con flechas del teclado (← →) y arrastre/swipe
-- Cada punto muestra: foto del evento, hora del día, descripción breve
+### 3. Timeline Interactivo — Horario Oficial 2026
+
+Línea horizontal de tiempo basada en el horario real de la 2da edición:
+
+| Hora | Artista |
+|------|---------|
+| 15:00 | DJ Leo Balderrama |
+| 15:20 | Adrián Deborah y los Dados Negros |
+| 15:55 | Munay Llajta |
+| 16:25 | Protección – La expresión del Folklore de Bolivia |
+| 17:25 | Los Capos |
+| 18:30 | Grupo Femenino Bolivia |
+| 19:30 | Turbo Mantikos |
+| 20:45 | Bonanza |
+| 21:50 | Eclipse |
+| 23:05 | Los Chalajaton |
+| 00:20 | Los Ronisch |
+
+- Navegación con flechas del teclado (← →) y swipe en mobile
+- Cada punto muestra: foto del artista o del evento en ese horario, hora, nombre
 - Fondo oscuro para contraste con las fotos
-- Las fotos se cargan desde `public/assets/festival/`
-- Datos del timeline se definen en un array de objetos en el componente (fácil de editar)
+- Fotos desde `public/assets/festival/`
+- Los datos se definen en un array en el componente (fácil de actualizar para 2027)
 
 ### 4. Aftermovie — Ventana YouTube
 
-- Embed de YouTube (`<iframe>`) del aftermovie 2026
-- Diseño tipo "pantalla de cine": fondo oscuro, bordes con acento naranja
-- Título grande arriba de la ventana
-- Responsivo: en mobile ocupa el ancho completo
+- Embed de YouTube del aftermovie 2026
+- **URL:** `https://youtu.be/FHAXjtf_iOA`
+- Diseño tipo "pantalla de cine": fondo oscuro, borde con acento naranja/durazno
+- Título: *"Reviví la 2da Edición"* o similar
+- Responsivo: ancho completo en mobile
 
 ### 5. La Música — Ventana Spotify
 
-- Embed oficial de Spotify (`<iframe>` con el endpoint `open.spotify.com/embed/playlist/...`)
-- Muestra la playlist del festival: portada, lista de tracks scrolleable, reproducción de previews
-- Misma estética que la sección YouTube
-- **Nota:** Reproducción completa requiere que el usuario esté logueado en Spotify. Los previews de 30s funcionan sin login.
+- Embed oficial de Spotify (`<iframe>` con `open.spotify.com/embed/playlist/...`)
+- Playlist del festival: portada, tracks scrolleables, reproducción de previews (30s sin login, completa con login)
+- Misma estética de "ventana" que la sección YouTube
+- **Pendiente:** URL de la playlist de Spotify (el cliente la provee)
 
 ### 6. Comunidad — Redes Sociales
 
-- **Instagram:** Feed de últimas publicaciones vía embed oficial. Si Meta no aprueba el embed, se usa una grilla estática de fotos con link al perfil.
-- **TikTok:** Últimos videos embebidos con `<blockquote>` + script de TikTok, o grilla estática con link.
-- Dos bloques lado a lado (en desktop), apilados en mobile
-- Botones grandes debajo con links directos a los perfiles de IG y TikTok
+- **Instagram:** Embed de últimas publicaciones. Fallback: grilla estática con fotos + link al perfil
+- **TikTok:** Últimos videos embebidos. Fallback: grilla estática con link al perfil
+- Dos columnas en desktop, apiladas en mobile
+- Botones CTA grandes: *"Seguinos en Instagram"* / *"Seguinos en TikTok"*
+- **Pendiente:** URLs de los perfiles (el cliente los provee)
 
 ### 7. Próximamente 2027 — Teaser
 
-- Sección de cierre antes del registro
-- Chiru y personajes secundarios en tamaño grande, con animaciones CSS suaves
-- Texto: *"2027 se viene"* o similar (a definir con el equipo)
-- Opcionalmente: cuenta regresiva si se tiene la fecha del próximo evento
-- Fondo con el gradiente completo de la marca
+- Chiru grande en el centro con animación suave de respiración/float
+- Montañas andinas y pasto en los bordes inferiores
+- Nubes 3D flotando
+- Texto principal: *"2027 se viene"*
+- Subtexto: *"Sé el primero en enterarte"* → flecha hacia el formulario
+- Fondo con gradiente completo de marca + textura de `fondo.jpg`
 
 ### 8. Registro de Email
 
-- Campo de email + botón CTA (ej: *"Quiero enterarme primero"*)
-- Fondo: gradiente completo violeta → rosa → durazno
+- Campo de email + botón CTA: *"Quiero enterarme primero"*
+- Fondo: gradiente de marca (puede reutilizar `fondo.jpg` o `fondo sin patron.jpg`)
 - Validación de email en el cliente (formato básico)
-- Los datos se envían a **Supabase** (base de datos PostgreSQL gratuita)
-- Tabla `subscribers` con campos: `email`, `created_at`, `source`
-- La misma tabla sirve para la futura ticketera (se agrega `ticket_id` cuando corresponda)
-- Texto de privacidad debajo: *"No spam. Solo Vibra."*
-- Mensaje de éxito/error en pantalla tras enviar
+- Submit a **Supabase** — tabla `subscribers`: `id`, `email`, `created_at`, `source`
+- La misma tabla servirá para la ticketera futura
+- Texto de privacidad: *"Sin spam. Solo Vibra."*
+- Mensaje de confirmación en pantalla tras enviar
 
 ---
 
 ## Arquitectura para Escalar
 
 La ticketera futura se agrega como:
-- `/tickets` — nueva ruta en Next.js
-- Supabase ya instalado, solo se agregan tablas (`tickets`, `orders`, `payments`)
-- Ninguna sección de la landing necesita modificarse
+- `/tickets` — nueva ruta en Next.js, sin tocar la landing
+- Supabase ya instalado: solo se agregan tablas `tickets`, `orders`, `payments`
+- La tabla `subscribers` ya existente sirve de base para notificar a los registrados
 
 ---
 
@@ -140,17 +185,21 @@ La ticketera futura se agrega como:
 |------|----------|
 | Deploy | Vercel (free tier, conectado a GitHub) |
 | Base de datos | Supabase (free tier, PostgreSQL) |
-| Video hero | `<video>` local desde `public/assets/` o URL externa si el archivo es muy grande (+50MB → usar URL) |
-| Imágenes | Next.js `<Image>` component para optimización automática |
-| Animaciones | Tailwind + `framer-motion` para el timeline y count-up |
-| Responsivo | Mobile-first con Tailwind breakpoints (`sm`, `md`, `lg`) |
-| Fuentes | Google Fonts o fuente propia del branding (si está en `public/assets/branding/`) |
+| Video hero | `<video>` local si <50MB, URL de streaming si es más grande |
+| Imágenes | Next.js `<Image>` para optimización automática (WebP automático) |
+| Animaciones | `framer-motion` para timeline, float de personajes y count-up |
+| Responsivo | Mobile-first con Tailwind (`sm`, `md`, `lg`) |
+| Fuentes | Google Fonts — fuente display bold para títulos + sans-serif para cuerpo |
+| Textura de fondo | `fondo.jpg` como `background-image` con `background-size: cover` |
 
 ---
 
-## Restricciones y Notas
+## Pendientes del Cliente
 
-- La página no debe ser muy larga: el objetivo es que la mayoría llegue al registro de email al final
-- No hay sistema de login/auth en esta fase
-- Los embeds de Instagram/TikTok tienen limitaciones de la plataforma que pueden requerir aprobación
-- El video del aftermovie 2025 (hero) está pendiente de subir — se usa un placeholder hasta tenerlo
+| Item | Estado |
+|------|--------|
+| Video aftermovie 2025 (hero) | Pendiente de subir |
+| URL playlist Spotify | Pendiente |
+| URLs perfiles IG y TikTok | Pendiente |
+| Fotos del festival para el timeline | Pendiente de subir a `public/assets/festival/` |
+| Frase definitiva para teaser 2027 | A confirmar |

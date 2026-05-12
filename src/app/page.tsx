@@ -1,6 +1,8 @@
 import Hero from '@/components/Hero'
 import Stats from '@/components/Stats'
 import Timeline from '@/components/Timeline'
+import Aftermovie from '@/components/Aftermovie'
+import SpotifyPlayer from '@/components/SpotifyPlayer'
 
 export default function Home() {
   return (
@@ -8,6 +10,8 @@ export default function Home() {
       <Hero />
       <Stats />
       <Timeline />
+      <Aftermovie />
+      <SpotifyPlayer />
     </main>
   )
 }

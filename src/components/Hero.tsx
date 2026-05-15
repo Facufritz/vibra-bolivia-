@@ -51,9 +51,9 @@ export default function Hero() {
       <Image src="/assets/branding/IMG_3495.png" alt="" width={90} height={54}
         className="absolute bottom-20 left-[45%] z-30 opacity-35 animate-float hidden md:block" aria-hidden="true" />
 
-      {/* Contenido — centro izquierdo */}
+      {/* Contenido — mobile top-left, desktop centro-izquierda */}
       <motion.div
-        className="absolute top-1/2 -translate-y-1/2 left-8 md:left-16 lg:left-24 z-40 max-w-xl"
+        className="absolute top-24 left-4 md:top-1/2 md:-translate-y-1/2 md:left-16 lg:left-24 z-40 max-w-xl"
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.5 }}
@@ -67,7 +67,8 @@ export default function Hero() {
           priority
         />
         <p className="font-display text-2xl md:text-4xl lg:text-5xl text-white tracking-wide drop-shadow-lg leading-tight">
-          El festival que le devolvió<br className="hidden md:block" /> la música a Bolivia
+          <span className="text-vibra-orange">2027</span> viene con todo<br />
+          Algo grande se está armando
         </p>
       </motion.div>
 

@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react'
 import Image from 'next/image'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 
 interface SectionWrapperProps {
   children: React.ReactNode
@@ -11,6 +11,7 @@ interface SectionWrapperProps {
   grassBottom?: boolean
   mountainsBottom?: boolean
   parallax?: boolean
+  isFirst?: boolean
 }
 
 export default function SectionWrapper({
@@ -20,22 +21,32 @@ export default function SectionWrapper({
   grassBottom = false,
   mountainsBottom = false,
   parallax = false,
+  isFirst = false,
 }: SectionWrapperProps) {
   const sectionRef = useRef<HTMLElement>(null)
+  const reduceMotion = useReducedMotion()
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ['start start', 'end start'],
   })
 
   // Subtle vertical drift for parallax clouds
   const cloudY = useTransform(scrollYProgress, [0, 1], ['-15px', '15px'])
 
-  // Extra bottom padding para que el contenido no quede debajo de los assets decorativos
+  // Dark overlay opacity ramps as the next section covers this one
+  const darkOverlayOpacity = useTransform(scrollYProgress, [0, 1], [0, 0.35])
+
+  // Extra bottom padding so children don't sit under decorative assets
   const contentPb = mountainsBottom ? 'pb-56 md:pb-48' : grassBottom ? 'pb-20 md:pb-28' : ''
 
+  // Sticky stacking classes — disabled when user prefers reduced motion
+  const stickyClasses = reduceMotion
+    ? 'relative'
+    : `sticky top-0 min-h-screen ${isFirst ? '' : 'rounded-t-3xl shadow-[0_-20px_40px_rgba(0,0,0,0.15)] -mt-6'}`
+
   return (
-    <section ref={sectionRef} className="relative overflow-hidden">
+    <section ref={sectionRef} className={`${stickyClasses} relative overflow-hidden`}>
       {/* Brand texture base */}
       <div className="absolute inset-0 vibra-texture" />
       {/* Purple brand tint over texture */}
@@ -103,7 +114,7 @@ export default function SectionWrapper({
         {children}
       </div>
 
-      {/* Bottom decorative assets — altura fija + overflow-hidden para que no invadan la sección de arriba */}
+      {/* Bottom decorative assets — altura fija + overflow-hidden */}
       {mountainsBottom && (
         <div className="absolute bottom-0 left-0 w-full z-10 pointer-events-none overflow-hidden h-28 md:h-40 lg:h-52">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -125,6 +136,16 @@ export default function SectionWrapper({
             className="absolute bottom-0 left-0 w-full h-auto"
           />
         </div>
+      )}
+
+      {/* Progressive dark overlay — fades in as the next section covers this one */}
+      {!reduceMotion && (
+        <motion.div
+          data-testid="dark-overlay"
+          style={{ opacity: darkOverlayOpacity }}
+          className="absolute inset-0 z-40 bg-black pointer-events-none"
+          aria-hidden="true"
+        />
       )}
     </section>
   )

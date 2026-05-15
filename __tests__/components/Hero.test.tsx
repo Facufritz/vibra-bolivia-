@@ -33,4 +33,24 @@ describe('Hero', () => {
     expect(content?.className).toMatch(/md:top-1\/2/)
     expect(content?.className).toMatch(/md:-translate-y-1\/2/)
   })
+
+  it('applies sticky + min-h-screen classes to the section', () => {
+    const { container } = render(<Hero />)
+    const section = container.querySelector('section')
+    expect(section?.className).toMatch(/sticky/)
+    expect(section?.className).toMatch(/top-0/)
+    expect(section?.className).toMatch(/min-h-screen/)
+  })
+
+  it('does not apply rounded-t (Hero is the first section)', () => {
+    const { container } = render(<Hero />)
+    const section = container.querySelector('section')
+    expect(section?.className).not.toMatch(/rounded-t-3xl/)
+  })
+
+  it('renders the dark overlay div', () => {
+    const { container } = render(<Hero />)
+    const overlay = container.querySelector('[data-testid="dark-overlay"]')
+    expect(overlay).not.toBeNull()
+  })
 })

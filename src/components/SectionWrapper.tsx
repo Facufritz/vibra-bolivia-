@@ -106,25 +106,23 @@ export default function SectionWrapper({
       {/* Bottom decorative assets — mountains first, grass on top */}
       {mountainsBottom && (
         <div className="absolute bottom-0 left-0 w-full z-10 pointer-events-none">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/assets/branding/IMG_3496.png"
             alt=""
-            width={1440}
-            height={160}
-            className="w-full object-cover opacity-60"
             aria-hidden="true"
+            className="w-full h-auto block opacity-70"
           />
         </div>
       )}
       {grassBottom && (
         <div className="absolute bottom-0 left-0 w-full z-20 pointer-events-none">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/assets/branding/IMG_3494.png"
             alt=""
-            width={1440}
-            height={80}
-            className="w-full object-cover"
             aria-hidden="true"
+            className="w-full h-auto block"
           />
         </div>
       )}

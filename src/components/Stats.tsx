@@ -54,13 +54,25 @@ export default function Stats() {
         </div>
       </div>
 
-      <div className="absolute bottom-16 right-4 md:right-16 w-32 md:w-48 pointer-events-none z-40">
+      {/* Chiru desktop — md+ esquina inferior derecha */}
+      <div className="hidden md:block absolute bottom-16 right-4 md:right-16 w-32 md:w-48 pointer-events-none z-40">
         <Image
           src="/assets/branding/Chiru%20png%20.png"
           alt="Chiru"
           width={192}
           height={192}
           className="animate-float"
+        />
+      </div>
+
+      {/* Chiru mobile — centrado debajo de la grilla */}
+      <div className="md:hidden flex justify-center mt-12 pointer-events-none">
+        <Image
+          src="/assets/branding/Chiru%20png%20.png"
+          alt="Chiru"
+          width={128}
+          height={128}
+          className="animate-float w-32"
         />
       </div>
     </SectionWrapper>

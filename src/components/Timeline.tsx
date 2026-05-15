@@ -32,15 +32,16 @@ export default function Timeline() {
     <SectionWrapper grassBottom>
       <div className="max-w-5xl mx-auto">
         <h2 className="font-display text-4xl md:text-5xl text-center text-white mb-4 tracking-wider">
-          El Horario del 2026
+          El line up del 2026
         </h2>
         <p className="text-center text-white/50 text-sm mb-12">
           Usá ← → o tocá los puntos para navegar
         </p>
+
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
-            className="relative w-full aspect-video rounded-2xl overflow-hidden mb-10 border border-white/10"
+            className="relative w-full aspect-video rounded-2xl overflow-hidden mb-6 border border-white/10"
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -40 }}
@@ -52,14 +53,16 @@ export default function Timeline() {
               fill
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+            {/* Gradient solo para legibilidad del nombre */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
             <div className="absolute bottom-6 left-6">
-              <span className="font-display text-vibra-orange text-3xl">{entry.time}</span>
-              <p className="font-display text-white text-2xl mt-1">{entry.artist}</p>
+              <p className="font-display text-white text-2xl drop-shadow">{entry.artist}</p>
             </div>
           </motion.div>
         </AnimatePresence>
-        <div className="flex items-center justify-between mb-6">
+
+        {/* Navegación */}
+        <div className="flex items-center justify-between mb-4">
           <button
             onClick={goPrev}
             disabled={active === 0}
@@ -67,9 +70,6 @@ export default function Timeline() {
           >
             ← Anterior
           </button>
-          <span className="text-white/50 text-sm">
-            {active + 1} / {TIMELINE_2026.length}
-          </span>
           <button
             onClick={goNext}
             disabled={active === TIMELINE_2026.length - 1}
@@ -78,24 +78,21 @@ export default function Timeline() {
             Siguiente →
           </button>
         </div>
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 justify-start md:justify-center">
+
+        {/* Puntos — sin el contador 4/11 que tapaba */}
+        <div className="flex items-center gap-3 overflow-x-auto py-3 justify-start md:justify-center">
           {TIMELINE_2026.map((item, i) => (
             <button
               key={item.time}
               onClick={() => setActive(i)}
-              className="flex flex-col items-center gap-1 min-w-[52px] group"
-              aria-label={`${item.time} - ${item.artist}`}
+              className="flex-shrink-0 group"
+              aria-label={item.artist}
             >
-              <div className={`w-3 h-3 rounded-full transition-all ${
+              <div className={`w-3 h-3 rounded-full transition-all duration-200 ${
                 i === active
-                  ? 'bg-vibra-orange scale-150'
+                  ? 'bg-vibra-orange scale-125'
                   : 'bg-white/30 group-hover:bg-white/60'
               }`} />
-              <span className={`text-[10px] font-mono transition-colors ${
-                i === active ? 'text-vibra-orange' : 'text-white/40'
-              }`}>
-                {item.time}
-              </span>
             </button>
           ))}
         </div>

@@ -51,9 +51,9 @@ export default function Hero() {
       <Image src="/assets/branding/IMG_3495.png" alt="" width={90} height={54}
         className="absolute bottom-20 left-[45%] z-30 opacity-35 animate-float hidden md:block" aria-hidden="true" />
 
-      {/* Contenido — alineado a la izquierda, zona inferior como Love the 90s */}
+      {/* Contenido — centro izquierdo */}
       <motion.div
-        className="absolute bottom-16 left-8 md:left-16 lg:left-24 z-40 max-w-xl"
+        className="absolute top-1/2 -translate-y-1/2 left-8 md:left-16 lg:left-24 z-40 max-w-xl"
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.5 }}

@@ -31,8 +31,8 @@ export default function SectionWrapper({
   // Subtle vertical drift for parallax clouds
   const cloudY = useTransform(scrollYProgress, [0, 1], ['-15px', '15px'])
 
-  // Extra bottom padding so content doesn't overlap decorative assets
-  const contentPb = mountainsBottom ? 'pb-32' : grassBottom ? 'pb-24' : ''
+  // Extra bottom padding para que el contenido no quede debajo de los assets decorativos
+  const contentPb = mountainsBottom ? 'pb-56 md:pb-48' : grassBottom ? 'pb-20 md:pb-28' : ''
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
@@ -103,26 +103,26 @@ export default function SectionWrapper({
         {children}
       </div>
 
-      {/* Bottom decorative assets — mountains first, grass on top */}
+      {/* Bottom decorative assets — altura fija + overflow-hidden para que no invadan la sección de arriba */}
       {mountainsBottom && (
-        <div className="absolute bottom-0 left-0 w-full z-10 pointer-events-none">
+        <div className="absolute bottom-0 left-0 w-full z-10 pointer-events-none overflow-hidden h-28 md:h-40 lg:h-52">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/branding/IMG_3496.png"
             alt=""
             aria-hidden="true"
-            className="w-full h-auto block opacity-70"
+            className="absolute bottom-0 left-0 w-full h-auto opacity-80"
           />
         </div>
       )}
       {grassBottom && (
-        <div className="absolute bottom-0 left-0 w-full z-20 pointer-events-none">
+        <div className="absolute bottom-0 left-0 w-full z-20 pointer-events-none overflow-hidden h-16 md:h-24 lg:h-28">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/branding/IMG_3494.png"
             alt=""
             aria-hidden="true"
-            className="w-full h-auto block"
+            className="absolute bottom-0 left-0 w-full h-auto"
           />
         </div>
       )}

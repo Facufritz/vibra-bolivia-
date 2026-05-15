@@ -1,10 +1,8 @@
 import Hero from '@/components/Hero'
 import Stats from '@/components/Stats'
-import Timeline from '@/components/Timeline'
 import Aftermovie from '@/components/Aftermovie'
+import Timeline from '@/components/Timeline'
 import SpotifyPlayer from '@/components/SpotifyPlayer'
-import SocialMedia from '@/components/SocialMedia'
-import Teaser2027 from '@/components/Teaser2027'
 import EmailRegister from '@/components/EmailRegister'
 
 export default function Home() {
@@ -12,11 +10,9 @@ export default function Home() {
     <main>
       <Hero />
       <Stats />
-      <Timeline />
       <Aftermovie />
+      <Timeline />
       <SpotifyPlayer />
-      <SocialMedia />
-      <Teaser2027 />
       <EmailRegister />
     </main>
   )

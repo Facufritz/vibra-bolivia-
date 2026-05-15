@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { TIMELINE_2026 } from '@/lib/timeline-data'
+import SectionWrapper from '@/components/SectionWrapper'
 
 export default function Timeline() {
   const [active, setActive] = useState(0)
@@ -28,17 +29,14 @@ export default function Timeline() {
   const entry = TIMELINE_2026[active]
 
   return (
-    <section className="bg-black/90 py-20 px-4">
+    <SectionWrapper grassBottom>
       <div className="max-w-5xl mx-auto">
-
         <h2 className="font-display text-4xl md:text-5xl text-center text-white mb-4 tracking-wider">
           El Horario del 2026
         </h2>
         <p className="text-center text-white/50 text-sm mb-12">
           Usá ← → o tocá los puntos para navegar
         </p>
-
-        {/* Foto del artista activo */}
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
@@ -61,8 +59,6 @@ export default function Timeline() {
             </div>
           </motion.div>
         </AnimatePresence>
-
-        {/* Botones de navegación */}
         <div className="flex items-center justify-between mb-6">
           <button
             onClick={goPrev}
@@ -82,8 +78,6 @@ export default function Timeline() {
             Siguiente →
           </button>
         </div>
-
-        {/* Puntos del timeline */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 justify-start md:justify-center">
           {TIMELINE_2026.map((item, i) => (
             <button
@@ -105,8 +99,7 @@ export default function Timeline() {
             </button>
           ))}
         </div>
-
       </div>
-    </section>
+    </SectionWrapper>
   )
 }

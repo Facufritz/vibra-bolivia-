@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useRef, useState, useEffect } from 'react'
 import { useCountUp } from '@/hooks/useCountUp'
+import SectionWrapper from '@/components/SectionWrapper'
 
 const STATS = [
   { value: 15000, suffix: '+', label: 'Personas' },
@@ -41,13 +42,11 @@ export default function Stats() {
   }, [])
 
   return (
-    <section ref={ref} className="relative vibra-texture py-24 px-4 overflow-hidden">
-      <div className="max-w-5xl mx-auto">
-
+    <SectionWrapper clouds grassBottom parallax className="py-24">
+      <div ref={ref} className="max-w-5xl mx-auto">
         <h2 className="font-display text-4xl md:text-5xl text-center text-white mb-16 tracking-wider">
           Lo que fue Vibra Bolivia 2026
         </h2>
-
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
           {STATS.map((stat) => (
             <StatItem key={stat.label} {...stat} trigger={triggered} />
@@ -55,8 +54,7 @@ export default function Stats() {
         </div>
       </div>
 
-      {/* Chiru decorativo */}
-      <div className="absolute -bottom-4 right-4 md:right-16 w-32 md:w-48 pointer-events-none">
+      <div className="absolute bottom-16 right-4 md:right-16 w-32 md:w-48 pointer-events-none z-40">
         <Image
           src="/assets/branding/Chiru%20png%20.png"
           alt="Chiru"
@@ -65,18 +63,6 @@ export default function Stats() {
           className="animate-float"
         />
       </div>
-
-      {/* Pasto */}
-      <div className="absolute bottom-0 left-0 w-full pointer-events-none">
-        <Image
-          src="/assets/branding/IMG_3494.png"
-          alt=""
-          width={1440}
-          height={80}
-          className="w-full object-cover"
-          aria-hidden="true"
-        />
-      </div>
-    </section>
+    </SectionWrapper>
   )
 }

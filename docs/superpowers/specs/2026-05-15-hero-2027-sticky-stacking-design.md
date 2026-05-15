@@ -20,30 +20,44 @@ El fondo de cada sección (textura andina `fondo.jpg` + overlay `bg-vibra-purple
 - El Hero actual ("El festival que le devolvió la música a Bolivia") apunta al pasado. La landing es de hype para 2027, debe anunciarlo.
 - Las 6 secciones del scroll actual se ven idénticas (mismo fondo, mismo overlay), generando monotonía. Sticky stacking rompe esa sensación sin tocar la paleta que el cliente quiere conservar.
 
-## Cambio 1 — Hero copy
+## Cambio 1 — Hero copy + layout mobile
 
-### Antes
+### Cambio de copy
 
+**Antes:**
 ```tsx
 <p className="font-display text-2xl md:text-4xl lg:text-5xl text-white tracking-wide drop-shadow-lg leading-tight">
   El festival que le devolvió<br className="hidden md:block" /> la música a Bolivia
 </p>
 ```
 
-### Después
-
+**Después:**
 ```tsx
 <p className="font-display text-2xl md:text-4xl lg:text-5xl text-white tracking-wide drop-shadow-lg leading-tight">
-  <span className="text-vibra-orange">2027</span> viene con todo<br className="hidden md:block" />
+  <span className="text-vibra-orange">2027</span> viene con todo<br />
   Algo grande se está armando
 </p>
 ```
 
-- Solo cambia el contenido del `<p>` dentro de la `motion.div` del Hero.
-- "2027" usa la clase `text-vibra-orange` (#F5A020) para destacarse.
-- Layout, fuente, tamaños responsive, posición (centro-izquierda), animación de entrada — todo igual.
+- "2027" en `text-vibra-orange` (#F5A020).
+- `<br />` **siempre visible** (mobile y desktop) para mantener dos líneas cortas en cualquier viewport. (Antes el `<br>` tenía `hidden md:block` y en mobile el texto era una sola línea larga.)
 
-**Archivo afectado por este cambio de copy:** `src/components/Hero.tsx` (solo este `<p>` cambia para el copy de 2027). El mismo archivo también recibe cambios estructurales del Cambio 2 (sticky + overlay), pero esos son independientes del copy.
+### Cambio de posición del logo en mobile
+
+**Antes:** logo verticalmente centrado (`top-1/2 -translate-y-1/2`), tanto mobile como desktop.
+
+**Después:** en mobile el contenido (logo + frase) va **arriba a la izquierda** (`top-24 left-4`), en desktop sigue centro-izquierda como hoy.
+
+```tsx
+<motion.div
+  className="absolute top-24 left-4 md:top-1/2 md:-translate-y-1/2 md:left-16 lg:left-24 z-40 max-w-xl"
+  ...
+>
+```
+
+Esto saca el contenido del medio del video en mobile y deja más aire abajo (donde hay caras/acción del aftermovie que se ven mejor sin texto encima).
+
+**Archivo afectado:** `src/components/Hero.tsx` (copy + posición). El mismo archivo también recibe cambios estructurales del Cambio 2 (sticky + overlay), pero esos son independientes.
 
 ## Cambio 2 — Sticky scroll stacking
 
@@ -97,12 +111,47 @@ Mismo comportamiento que desktop. **No se atenúa.** Variant D queda activa: bor
 #### `src/app/globals.css`
 - `body` tiene `overflow-x: hidden`. Esto **no** rompe sticky (solo `overflow-y` lo rompería). Sin cambios.
 
+## Cambio 3 — Reposicionar Chiru en Stats (mobile)
+
+### Problema
+
+Hoy Chiru en Stats está `absolute bottom-16 right-4 md:right-16 w-32 md:w-48`. En mobile se monta sobre el texto "EDICIONES" del 4to stat. Visible en screenshots actuales.
+
+### Solución
+
+Chiru cambia de comportamiento según viewport:
+
+- **Mobile (`< md`):** sale del `absolute` y se renderiza como bloque **centrado debajo de la grilla de stats**. Tamaño chico-medio (`w-32`).
+- **Desktop (`md+`):** queda donde está hoy (`absolute bottom-16 right-16 w-48`).
+
+Esto requiere mover el `<Image>` de Chiru fuera del bloque `absolute` cuando el viewport es mobile. Dos opciones de implementación:
+
+**Opción A (preferida):** renderizar Chiru dos veces con clases `hidden`/`block` responsivas — uno para mobile (block en flujo abajo), otro para desktop (absolute como hoy). Misma fuente de imagen.
+
+**Opción B:** un solo `<Image>` con clases responsive que cambian de `absolute` a `static` y posición. Más concisa pero más frágil con Tailwind.
+
+Implementación va con **Opción A** por claridad.
+
+```tsx
+{/* Chiru desktop — solo md+ */}
+<div className="hidden md:block absolute bottom-16 right-16 w-48 pointer-events-none z-40">
+  <Image src="..." width={192} height={192} className="animate-float" />
+</div>
+
+{/* Chiru mobile — centrado debajo de la grilla */}
+<div className="md:hidden flex justify-center mt-12 w-32 mx-auto pointer-events-none">
+  <Image src="..." width={128} height={128} className="animate-float" />
+</div>
+```
+
+**Archivo afectado:** `src/components/Stats.tsx`.
+
 ## Lo que NO cambia
 
 - Paleta de marca, fonts, textura de fondo, overlay morado base
 - Estructura y orden de las secciones
-- Componentes Stats, Aftermovie, Timeline, Spotify, EmailRegister (su lógica interna)
-- Assets decorativos (nubes, pasto, montañas, Chiru en Stats)
+- Lógica interna de Stats, Aftermovie, Timeline, Spotify, EmailRegister (count-up, slider, iframes, form)
+- Assets decorativos (nubes, pasto, montañas)
 - API de Supabase y `route.ts`
 - Tests existentes en `__tests__/`
 

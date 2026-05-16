@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { TIMELINE_2026 } from '@/lib/timeline-data'
 import SectionWrapper from '@/components/SectionWrapper'
+import SectionPill from '@/components/SectionPill'
+import Sparkles from '@/components/Sparkles'
 
 export default function Timeline() {
   const [active, setActive] = useState(0)
@@ -31,17 +33,23 @@ export default function Timeline() {
   return (
     <SectionWrapper grassBottom>
       <div className="max-w-5xl mx-auto">
-        <h2 className="font-display text-4xl md:text-5xl text-center text-white mb-4 tracking-wider">
-          El line up del 2026
-        </h2>
-        <p className="text-center text-white/50 text-sm mb-12">
-          Usá ← → o tocá los puntos para navegar
-        </p>
+        <div className="text-center mb-12">
+          <SectionPill>★ LINE UP 2026 ★</SectionPill>
+          <div className="relative inline-block">
+            <Sparkles />
+            <h2 className="font-display text-4xl md:text-5xl text-white tracking-wider section-title">
+              El line up del 2026
+            </h2>
+          </div>
+          <p className="text-white/50 text-sm mt-6">
+            Usá ← → o tocá los puntos para navegar
+          </p>
+        </div>
 
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
-            className="relative w-full aspect-video rounded-2xl overflow-hidden mb-6 border border-white/10"
+            className="relative w-full aspect-video rounded-2xl overflow-hidden mb-6 border-2 border-vibra-orange/40"
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -40 }}
@@ -53,7 +61,6 @@ export default function Timeline() {
               fill
               className="object-cover"
             />
-            {/* Gradient solo para legibilidad del nombre */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
             <div className="absolute bottom-6 left-6">
               <p className="font-display text-white text-2xl drop-shadow">{entry.artist}</p>
@@ -61,7 +68,6 @@ export default function Timeline() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Navegación */}
         <div className="flex items-center justify-between mb-4">
           <button
             onClick={goPrev}
@@ -79,21 +85,23 @@ export default function Timeline() {
           </button>
         </div>
 
-        {/* Puntos — sin el contador 4/11 que tapaba */}
         <div className="flex items-center gap-3 overflow-x-auto py-3 justify-start md:justify-center">
           {TIMELINE_2026.map((item, i) => (
-            <button
+            <motion.button
               key={item.time}
               onClick={() => setActive(i)}
               className="flex-shrink-0 group"
               aria-label={item.artist}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: i * 0.05 }}
             >
               <div className={`w-3 h-3 rounded-full transition-all duration-200 ${
                 i === active
                   ? 'bg-vibra-orange scale-125'
                   : 'bg-white/30 group-hover:bg-white/60'
               }`} />
-            </button>
+            </motion.button>
           ))}
         </div>
       </div>

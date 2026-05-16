@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react'
 import Image from 'next/image'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, useInView, useReducedMotion } from 'framer-motion'
 
 interface SectionWrapperProps {
   children: React.ReactNode
@@ -29,6 +29,10 @@ export default function SectionWrapper({
   })
 
   const cloudY = useTransform(scrollYProgress, [0, 1], ['-15px', '15px'])
+
+  const inViewRef = useRef(null)
+  const isInView = useInView(inViewRef, { once: true, amount: 0.2 })
+  const reduceMotion = useReducedMotion()
 
   const contentPb = mountainsBottom ? 'pb-56 md:pb-48' : grassBottom ? 'pb-20 md:pb-28' : ''
 
@@ -96,10 +100,17 @@ export default function SectionWrapper({
         </>
       )}
 
-      {/* Children sit above overlays and clouds */}
-      <div className={`relative z-30 py-20 px-4 ${contentPb} ${className ?? ''}`}>
+      {/* Children sit above overlays and clouds — reveal on scroll */}
+      <motion.div
+        ref={inViewRef}
+        data-testid="reveal-wrapper"
+        initial={reduceMotion ? false : { opacity: 0, y: 30 }}
+        animate={reduceMotion || isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className={`relative z-30 py-20 px-4 ${contentPb} ${className ?? ''}`}
+      >
         {children}
-      </div>
+      </motion.div>
 
       {/* Bottom decorative assets — altura fija + overflow-hidden */}
       {mountainsBottom && (

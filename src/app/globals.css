@@ -19,4 +19,14 @@
     background-size: cover;
     background-position: center;
   }
+
+  .section-title {
+    -webkit-text-stroke: 1.5px #4FC3F7;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    paint-order: stroke fill;
+  }
+
+  .chunky-3d {
+    text-shadow: 3px 3px 0 #000, 4px 4px 12px rgba(0, 0, 0, 0.3);
+  }
 }

@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import SectionWrapper from '@/components/SectionWrapper'
+import SectionPill from '@/components/SectionPill'
+import Sparkles from '@/components/Sparkles'
 
 export default function EmailRegister() {
   const [email, setEmail]   = useState('')
@@ -34,7 +36,31 @@ export default function EmailRegister() {
   return (
     <div id="registro">
       <SectionWrapper clouds grassBottom mountainsBottom parallax className="py-28">
-        <div className="max-w-lg mx-auto text-center">
+        <div className="relative max-w-lg mx-auto text-center">
+          {/* Chiru desktop — al lado izquierdo del form */}
+          <div className="hidden lg:block absolute -left-72 top-1/2 -translate-y-1/2 w-52 pointer-events-none">
+            <Image
+              src="/assets/branding/Chiru%20png%20.png"
+              alt=""
+              width={208}
+              height={208}
+              className="animate-float"
+              aria-hidden="true"
+            />
+          </div>
+
+          {/* Chiru mobile — arriba del logo */}
+          <div className="lg:hidden flex justify-center mb-6 pointer-events-none">
+            <Image
+              src="/assets/branding/Chiru%20png%20.png"
+              alt=""
+              width={128}
+              height={128}
+              className="w-32 animate-float"
+              aria-hidden="true"
+            />
+          </div>
+
           <Image
             src="/assets/multimedia/vibra%20png.png"
             alt="Vibra Bolivia"
@@ -42,10 +68,17 @@ export default function EmailRegister() {
             height={120}
             className="mx-auto mb-8 w-48 md:w-72"
           />
-          <h2 className="font-display text-4xl md:text-6xl text-white tracking-wider mb-4">
-            Quiero enterarme primero
-          </h2>
-          <p className="text-white/70 text-lg mb-10">
+
+          <SectionPill className="mx-auto">★ PREVENTA 2027 ★</SectionPill>
+
+          <div className="relative inline-block mt-2">
+            <Sparkles />
+            <h2 className="font-display text-4xl md:text-6xl text-white tracking-wider section-title">
+              Quiero enterarme primero
+            </h2>
+          </div>
+
+          <p className="text-white/70 text-lg mt-6 mb-10">
             Dejá tu mail y te avisamos cuando abramos la preventa del 2027.
           </p>
 
@@ -61,12 +94,12 @@ export default function EmailRegister() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="tu@email.com"
                 required
-                className="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/30 text-white placeholder-white/40 focus:outline-none focus:border-vibra-orange text-lg"
+                className="flex-1 px-6 py-4 rounded-full bg-white/10 border-2 border-vibra-orange/60 text-white placeholder-white/40 focus:outline-none focus:border-vibra-orange focus:shadow-[0_0_20px_rgba(245,160,32,0.4)] text-lg transition-all"
               />
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="px-8 py-4 bg-vibra-orange text-white font-display text-xl tracking-wider rounded-full hover:opacity-90 disabled:opacity-60 transition whitespace-nowrap"
+                className="px-8 py-4 bg-vibra-orange text-white font-display text-xl tracking-wider rounded-full hover:opacity-90 disabled:opacity-60 transition whitespace-nowrap chunky-3d"
               >
                 {status === 'loading' ? 'Enviando...' : 'Me anoto'}
               </button>

@@ -33,4 +33,12 @@ describe('Hero', () => {
     expect(content?.className).toMatch(/md:top-1\/2/)
     expect(content?.className).toMatch(/md:-translate-y-1\/2/)
   })
+
+  it('renders Chiru between the clouds (desktop only)', () => {
+    const { container } = render(<Hero />)
+    const chiru = container.querySelector('img[src*="Chiru"]')
+    expect(chiru).not.toBeNull()
+    expect(chiru?.className).toMatch(/hidden/)
+    expect(chiru?.className).toMatch(/md:block/)
+  })
 })

@@ -51,6 +51,16 @@ export default function Hero() {
       <Image src="/assets/branding/IMG_3495.png" alt="" width={90} height={54}
         className="absolute bottom-20 left-[45%] z-30 opacity-35 animate-float hidden md:block" aria-hidden="true" />
 
+      {/* Chiru entre las nubes — solo desktop */}
+      <Image
+        src="/assets/branding/Chiru%20png%20.png"
+        alt=""
+        width={144}
+        height={144}
+        className="absolute top-12 right-12 md:right-24 z-[35] w-24 md:w-36 opacity-85 animate-float hidden md:block"
+        aria-hidden="true"
+      />
+
       {/* Contenido — mobile top-left, desktop centro-izquierda */}
       <motion.div
         className="absolute top-24 left-4 md:top-1/2 md:-translate-y-1/2 md:left-16 lg:left-24 z-40 max-w-xl"

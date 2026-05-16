@@ -1,26 +1,11 @@
 'use client'
 
-import { useRef } from 'react'
 import Image from 'next/image'
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const reduceMotion = useReducedMotion()
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  })
-
-  const darkOverlayOpacity = useTransform(scrollYProgress, [0, 1], [0, 0.35])
-
-  const stickyClasses = reduceMotion
-    ? 'relative h-screen'
-    : 'sticky top-0 min-h-screen'
-
   return (
-    <section ref={sectionRef} className={`${stickyClasses} w-full overflow-hidden`}>
+    <section className="relative h-screen w-full overflow-hidden">
 
       {/* Fondo estático — visible mientras el video carga */}
       <div className="absolute inset-0 z-0 vibra-texture" />
@@ -95,16 +80,6 @@ export default function Hero() {
           </svg>
         </div>
       </div>
-
-      {/* Progressive dark overlay — fades in as the next section covers this one */}
-      {!reduceMotion && (
-        <motion.div
-          data-testid="dark-overlay"
-          style={{ opacity: darkOverlayOpacity }}
-          className="absolute inset-0 z-50 bg-black pointer-events-none"
-          aria-hidden="true"
-        />
-      )}
 
     </section>
   )

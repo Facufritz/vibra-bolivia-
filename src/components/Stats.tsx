@@ -2,8 +2,11 @@
 
 import Image from 'next/image'
 import { useRef, useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import { useCountUp } from '@/hooks/useCountUp'
 import SectionWrapper from '@/components/SectionWrapper'
+import SectionPill from '@/components/SectionPill'
+import Sparkles from '@/components/Sparkles'
 
 const STATS = [
   { value: 15000, suffix: '+', label: 'Personas' },
@@ -18,7 +21,7 @@ function StatItem({ value, suffix, label, trigger }: {
   const count = useCountUp(value, 2000, trigger)
   return (
     <div className="text-center">
-      <p className="font-display text-5xl md:text-7xl text-vibra-orange drop-shadow-lg">
+      <p className="font-display text-5xl md:text-7xl text-vibra-orange chunky-3d">
         {value >= 1000 ? count.toLocaleString('es-AR') : count}{suffix}
       </p>
       <p className="font-sans text-white/90 text-lg md:text-xl mt-2 tracking-wide uppercase">
@@ -44,12 +47,29 @@ export default function Stats() {
   return (
     <SectionWrapper clouds grassBottom parallax className="py-24">
       <div ref={ref} className="max-w-5xl mx-auto">
-        <h2 className="font-display text-4xl md:text-5xl text-center text-white mb-16 tracking-wider">
-          Lo que fue Vibra Bolivia 2026
-        </h2>
+        <div className="text-center mb-16">
+          <SectionPill>★ 2DA EDICIÓN ★</SectionPill>
+          <div className="relative inline-block">
+            <Sparkles />
+            <h2 className="font-display text-4xl md:text-5xl text-white tracking-wider section-title">
+              Lo que fue Vibra Bolivia 2026
+            </h2>
+          </div>
+          <p className="font-display text-sm md:text-base text-white/70 tracking-[0.3em] mt-6">
+            ★ ★ ★ SEGUNDA EDICIÓN ★ ★ ★
+          </p>
+        </div>
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
-          {STATS.map((stat) => (
-            <StatItem key={stat.label} {...stat} trigger={triggered} />
+          {STATS.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={triggered ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <StatItem {...stat} trigger={triggered} />
+            </motion.div>
           ))}
         </div>
       </div>

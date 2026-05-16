@@ -1,16 +1,24 @@
 import SectionWrapper from '@/components/SectionWrapper'
+import SectionPill from '@/components/SectionPill'
+import Sparkles from '@/components/Sparkles'
 
 export default function SpotifyPlayer() {
   return (
     <SectionWrapper clouds grassBottom parallax>
       <div className="max-w-4xl mx-auto">
-        <h2 className="font-display text-4xl md:text-5xl text-center text-white mb-4 tracking-wider">
-          La Música del Festival
-        </h2>
-        <p className="text-center text-white/70 mb-10 text-lg">
-          Escuchá la playlist oficial de Vibra Bolivia
-        </p>
-        <div className="rounded-2xl overflow-hidden border-2 border-vibra-blue/50 shadow-[0_0_40px_rgba(79,195,247,0.2)]">
+        <div className="text-center mb-10">
+          <SectionPill>★ PLAYLIST OFICIAL ★</SectionPill>
+          <div className="relative inline-block">
+            <Sparkles />
+            <h2 className="font-display text-4xl md:text-5xl text-white tracking-wider section-title">
+              La Música del Festival
+            </h2>
+          </div>
+          <p className="text-white/70 text-lg mt-6">
+            Escuchá la playlist oficial de Vibra Bolivia
+          </p>
+        </div>
+        <div className="rounded-2xl overflow-hidden border-2 border-vibra-blue/70 shadow-[0_0_50px_rgba(79,195,247,0.25)]">
           <iframe
             src="https://open.spotify.com/embed/playlist/5HIpNO8FbzDDGhHdyRLvib?utm_source=generator&theme=0"
             width="100%"

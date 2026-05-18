@@ -8,17 +8,19 @@ import Sparkles from '@/components/Sparkles'
 
 export default function EmailRegister() {
   const [email, setEmail]   = useState('')
+  const [honeypot, setHoneypot] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (honeypot) return
     setStatus('loading')
 
     const res = await fetch('/api/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email, website: honeypot }),
     })
 
     const data = await res.json()
@@ -88,6 +90,17 @@ export default function EmailRegister() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+              {/* honeypot — invisible para humanos, los bots lo completan */}
+              <input
+                type="text"
+                name="website"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}
+              />
               <input
                 type="email"
                 value={email}

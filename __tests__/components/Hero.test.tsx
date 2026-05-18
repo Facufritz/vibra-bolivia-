@@ -27,9 +27,11 @@ describe('Hero', () => {
 
   it('positions content top-left on mobile and centered-left on md+', () => {
     const { container } = render(<Hero />)
-    // The content wrapper should have both responsive position classes
-    const content = container.querySelector('[class*="top-24"]')
+    // The content wrapper is identified by max-w-xl (unique to it)
+    const content = container.querySelector('[class*="max-w-xl"]')
     expect(content).not.toBeNull()
+    expect(content?.className).toMatch(/top-8/)
+    expect(content?.className).toMatch(/left-4/)
     expect(content?.className).toMatch(/md:top-1\/2/)
     expect(content?.className).toMatch(/md:-translate-y-1\/2/)
   })

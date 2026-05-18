@@ -7,12 +7,16 @@ export default function Aftermovie() {
     <SectionWrapper clouds mountainsBottom parallax>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10">
-          <SectionPill>★ AFTERMOVIE OFICIAL ★</SectionPill>
-          <div className="relative inline-block">
-            <Sparkles />
-            <h2 className="font-display text-4xl md:text-5xl text-white tracking-wider section-title">
-              Reviví la 2da Edición
-            </h2>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
+            <div className="transform md:translate-y-[6px]">
+              <SectionPill>★ AFTERMOVIE OFICIAL ★</SectionPill>
+            </div>
+            <div className="relative inline-block">
+              <Sparkles />
+              <h2 className="font-display text-4xl md:text-5xl text-white tracking-wider section-title">
+                Reviví la 2da Edición
+              </h2>
+            </div>
           </div>
           <p className="font-display text-sm md:text-base text-white/70 tracking-[0.3em] mt-6">
             ★ ★ ★ AFTERMOVIE OFICIAL ★ ★ ★
